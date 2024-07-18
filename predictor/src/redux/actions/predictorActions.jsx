@@ -1,5 +1,5 @@
+import { message } from 'antd';
 import axios from 'axios';
-import { toast } from 'react-toastify';
 
 export const SET_FILTER = 'SET_FILTER';
 export const SET_RANK = 'SET_RANK';
@@ -25,7 +25,7 @@ export const predict = (rank, filters) => async (dispatch) => {
       filters,
     });
     dispatch({ type: PREDICT_SUCCESS, payload: response.data });
-    toast.success('Prediction successful!');
+    message.success('Prediction successful!');
   } catch (error) {
     console.error('Prediction error:', error);
     console.error('Error response:', error.response);
@@ -34,11 +34,11 @@ export const predict = (rank, filters) => async (dispatch) => {
     dispatch({ type: PREDICT_FAILURE, payload: error.message });
     
     if (error.response && error.response.data) {
-      toast.error(`Error in prediction: ${error.response.data}`);
+      message.error(`Error in prediction: ${error.response.data}`);
     } else if (error.message) {
-      toast.error(`Error in prediction: ${error.message}`);
+      message.error(`Error in prediction: ${error.message}`);
     } else {
-      toast.error('An error occurred during prediction. Please try again.');
+      message.error('An error occurred during prediction. Please try again.');
     }
   }
 };

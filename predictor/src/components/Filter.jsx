@@ -1,9 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Select, Button, Skeleton } from 'antd';
+import { Select, Button, Skeleton, Input, Card } from 'antd';
 import { setFilter, setRank, predict } from '../redux/actions/predictorActions';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 const { Option } = Select;
 
@@ -37,6 +35,7 @@ const Filter = ({ loading }) => {
 
   return (
     <Skeleton active loading={loading}>
+      <Card style={{ marginBottom: '20px' }}>
       <div className="parameter-grid" style={{ marginBottom: '1.25rem' }}>
         <div className="parameter">
           <label style={{ marginRight: '0.625rem' }}>Institute Type</label>
@@ -138,8 +137,8 @@ const Filter = ({ loading }) => {
         </div>
         <div className="parameter">
           <label style={{ marginRight: '0.625rem' }}>General JEE Rank<span style={{ color: 'red' }}>*</span></label>
-          <input
-            type="text"
+          <Input
+            type="number"
             placeholder="Enter Rank"
             value={rank}
             onChange={handleRankChange}
@@ -147,10 +146,10 @@ const Filter = ({ loading }) => {
           />
         </div>
       </div>
+      </Card>
       <div style={{ marginBottom: '0.625rem' }}>
         <Button type="primary" onClick={handlePredict} disabled={loading}>Predict</Button>
       </div>
-      <ToastContainer />
     </Skeleton>
   );
 };
